@@ -17,3 +17,8 @@ export function useCanvasByContext() {
 
   return canvas;
 }
+
+// export function useSelectedCmp() {
+//   const canvas = useContext(CanvasContext);
+//   return canvas.getSelectedCmp();
+// }

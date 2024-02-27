@@ -14,29 +14,13 @@ const defaultCanvas = {
     boxSizing: "content-box",
   },
   // 组件
-  // cmps: [],
-  // 测试组件
-  cmps: [
-    {
-      key: getOnlyKey(),
-      desc: "文本",
-      value: "文本",
-      style: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: 100,
-        height: 30,
-        fontSize: 12,
-        color: "red",
-      },
-    },
-  ],
+  cmps: [],
 };
 
 class Canvas {
   constructor(canvas = defaultCanvas) {
     this.canvas = canvas; // 页面数据
+    this.selectedCmpIndex = null; // 被选中的下标
     this.listeners = [];
   }
 
@@ -52,11 +36,42 @@ class Canvas {
     Object.assign(this.canvas, canvas);
   };
 
+  getSelectedCmpIndex = () => {
+    return this.selectedCmpIndex;
+  };
+
+  getSelectedCmp = () => {
+    return this.canvas.cmps[this.selectedCmpIndex];
+  };
+
+  setSelectedCmpIndex = (index) => {
+    if (this.selectedCmpIndex === index) {
+      return;
+    }
+
+    this.selectedCmpIndex = index;
+    // 如果第一次选中，需要增加边框，所以需要重新更新app样式
+    this.updateApp();
+  };
+
   addCmp = (cmp) => {
     const _cmp = { key: getOnlyKey(), ...cmp };
     this.canvas.cmps.push(_cmp);
+    // 更新下标
+    this.selectedCmpIndex = this.canvas.cmps.length - 1;
+    // this.setSelectedCmpIndex(this.canvas.cmps.length - 1); // 新增元素，重新设置下标
 
     // 更新组件
+    this.updateApp();
+  };
+
+  updateSelectedCmp = (newStyle = {}, newValue = {}) => {
+    const selectedCmp = this.getSelectedCmp();
+
+    Object.assign(this.canvas.cmps[this.getSelectedCmpIndex()], {
+      style: { ...selectedCmp.style, ...newStyle },
+      // newValue的修改
+    });
     this.updateApp();
   };
 
@@ -77,6 +92,10 @@ class Canvas {
     const obj = {
       getCanvas: this.getCanvas,
       getCanvasCmps: this.getCanvasCmps,
+      getSelectedCmpIndex: this.getSelectedCmpIndex,
+      setSelectedCmpIndex: this.setSelectedCmpIndex,
+      updateSelectedCmp: this.updateSelectedCmp,
+      getSelectedCmp: this.getSelectedCmp,
       addCmp: this.addCmp,
       subscribe: this.subscribe,
     };
