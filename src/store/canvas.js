@@ -48,7 +48,7 @@ class Canvas {
     if (this.selectedCmpIndex === index) {
       return;
     }
-
+    this.updateZIndex(index); // 清除zIndex的目的是让选中的组件放在上面
     this.selectedCmpIndex = index;
     // 如果第一次选中，需要增加边框，所以需要重新更新app样式
     this.updateApp();
@@ -65,11 +65,25 @@ class Canvas {
     this.updateApp();
   };
 
+  updateZIndex = (id) => {
+    this.canvas.cmps.forEach((item, index) => {
+      if (id === index) {
+        Object.assign(item, {
+          style: { ...item.style, zIndex: 1 },
+        });
+      } else {
+        Object.assign(item, {
+          style: { ...item.style, zIndex: 0 },
+        });
+      }
+    });
+  };
+
   updateSelectedCmp = (newStyle = {}, newValue = {}) => {
     const selectedCmp = this.getSelectedCmp();
 
     Object.assign(this.canvas.cmps[this.getSelectedCmpIndex()], {
-      style: { ...selectedCmp.style, ...newStyle },
+      style: { ...selectedCmp.style, ...newStyle, zIndex: 1 },
       // newValue的修改
     });
     this.updateApp();

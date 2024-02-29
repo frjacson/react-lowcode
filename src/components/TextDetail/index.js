@@ -17,6 +17,7 @@ const defaultStyle = {
   borderStyle: "none",
   borderWidth: "0",
   borderColor: "#ffffff00",
+  zIndex: 0,
 };
 
 const settings = [
@@ -35,7 +36,7 @@ const settings = [
   },
 ];
 
-export default function DetailsList() {
+export default function TextDetail({ type = "text" }) {
   const canvas = useCanvasByContext();
   const addCmp = (_cmp) => {
     canvas.addCmp(_cmp);
@@ -48,7 +49,8 @@ export default function DetailsList() {
           <li
             key={item.value}
             className={styles.item}
-            onClick={() => addCmp({ ...item })}
+            onClick={() => addCmp({ ...item, nodeType: type })}
+            draggable="false"
           >
             {item.value}
           </li>

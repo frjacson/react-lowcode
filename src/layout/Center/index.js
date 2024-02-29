@@ -15,7 +15,6 @@ export function Center(props) {
       const start = e.dataTransfer.getData("text/plain").split(",");
       const diffX = endX - start[0];
       const diffY = endY - start[1];
-
       const selectedCmp = canvas.getSelectedCmp();
       const oldStyle = selectedCmp.style;
       const top = oldStyle.top + diffY;
@@ -46,6 +45,7 @@ export function Center(props) {
             cmp={cmp}
             selected={selectedIndex === index}
             index={index}
+            type={cmp.nodeType}
           />
         ))}
       </div>

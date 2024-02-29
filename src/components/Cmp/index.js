@@ -3,7 +3,7 @@ import styles from "./index.less";
 import { useCanvasByContext } from "../../store/hooks";
 
 // todo: 拖拽 删除 改变层次关系
-export function Cmp({ cmp, selected, index }) {
+export function Cmp({ cmp, selected, index, type }) {
   const { style, value } = cmp;
   const { width, height } = style;
   const canvas = useCanvasByContext();
@@ -12,6 +12,7 @@ export function Cmp({ cmp, selected, index }) {
   };
   const handleDragStart = (e) => {
     handleSelected(index);
+
     // 拖拽的开始位置
     const startX = e.pageX;
     const startY = e.pageY;
@@ -66,6 +67,16 @@ export function Cmp({ cmp, selected, index }) {
     document.addEventListener("mouseup", handleMouseUp, false);
   };
 
+  const generateNodeByType = (value) => {
+    if (type === "text") {
+      return value;
+    } else if (type === "img") {
+      return <img src={value} alt="" />;
+    } else {
+      return null;
+    }
+  };
+
   return (
     <div
       className={styles.main}
@@ -75,7 +86,7 @@ export function Cmp({ cmp, selected, index }) {
     >
       {/* 组件本身 */}
       <div className={styles.cmp} style={style}>
-        {value}
+        {generateNodeByType(value)}
       </div>
 
       {/* 组件的功能，选中的样式 */}
