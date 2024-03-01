@@ -37,6 +37,10 @@ export function Center(props) {
       <div
         className={styles.canvas}
         onDrop={onDrop}
+        style={{
+          ...canvasData.style,
+          backgroundImage: `url(${style.backgroundImage})`,
+        }}
         onDragOver={(e) => allowDrop(e)}
       >
         {cmps.map((cmp, index) => (

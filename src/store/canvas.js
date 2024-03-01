@@ -89,6 +89,14 @@ class Canvas {
     this.updateApp();
   };
 
+  updateCanvasStyle = (newStyle = {}) => {
+    this.canvas.style = {
+      ...this.canvas.style,
+      ...newStyle,
+    };
+    this.updateApp();
+  };
+
   updateApp = () => {
     // 希望组件更新
     this.listeners.forEach((lis) => lis());
@@ -109,6 +117,7 @@ class Canvas {
       getSelectedCmpIndex: this.getSelectedCmpIndex,
       setSelectedCmpIndex: this.setSelectedCmpIndex,
       updateSelectedCmp: this.updateSelectedCmp,
+      updateCanvasStyle: this.updateCanvasStyle,
       getSelectedCmp: this.getSelectedCmp,
       addCmp: this.addCmp,
       subscribe: this.subscribe,
