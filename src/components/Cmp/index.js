@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import styles from "./index.less";
-import { useCanvasByContext } from "../../store/hooks";
+import { useCanvasByContext } from "@/store/hooks";
 
 // todo: 拖拽 删除 改变层次关系
 export function Cmp({ cmp, selected, index, type }) {

@@ -1,5 +1,5 @@
-import { useCanvasByContext } from "../../store/hooks";
-import { Cmp } from "../../components/Cmp";
+import { useCanvasByContext } from "@/store/hooks";
+import { Cmp } from "@/components/Cmp";
 import styles from "./index.less";
 import { useCallback } from "react";
 

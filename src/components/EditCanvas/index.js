@@ -1,4 +1,4 @@
-import { useCanvasByContext } from "../../store/hooks";
+import { useCanvasByContext } from "@/store/hooks";
 import InputColor from "react-input-color";
 import styles from "./index.less";
 

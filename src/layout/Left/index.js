@@ -1,6 +1,6 @@
 import { useState } from "react";
-import TextDetail from "../../components/TextDetail";
-import ImgDetail from "../../components/ImgDetail";
+import TextDetail from "@/components/TextDetail";
+import ImgDetail from "@/components/ImgDetail";
 import styles from "./index.less";
 
 export const listData = [
